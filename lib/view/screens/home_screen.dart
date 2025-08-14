@@ -1,5 +1,6 @@
 import 'package:depi_film_app/helpers/themes/app_colors.dart';
 import 'package:depi_film_app/models/movie_model.dart';
+import 'package:depi_film_app/view/screens/movie_details_screen.dart';
 import 'package:depi_film_app/view/widgets/featured_movie_item.dart';
 import 'package:depi_film_app/view/widgets/grid_movie_item.dart';
 import 'package:flutter/material.dart';
@@ -64,7 +65,19 @@ class HomeScreen extends StatelessWidget {
         itemCount: featuredMovies.length,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
-          return FeaturedMovieItem(item: featuredMovies[index]);
+          return InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder:
+                      (context) =>
+                          MovieDetailsScreen(movie: featuredMovies[index]),
+                ),
+              );
+            },
+            child: FeaturedMovieItem(item: featuredMovies[index]),
+          );
         },
         separatorBuilder: (BuildContext context, int index) {
           return const SizedBox(width: 10);
@@ -79,14 +92,25 @@ class HomeScreen extends StatelessWidget {
       child: GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          childAspectRatio: 0.5,
+          childAspectRatio: 0.56,
           crossAxisSpacing: 12,
         ),
         physics: const NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         itemCount: moviesList.length,
         itemBuilder: (context, index) {
-          return GridMovieItem(item: moviesList[index]);
+          return InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder:
+                      (context) => MovieDetailsScreen(movie: moviesList[index]),
+                ),
+              );
+            },
+            child: GridMovieItem(item: moviesList[index]),
+          );
         },
       ),
     );

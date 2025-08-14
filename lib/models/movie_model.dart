@@ -69,7 +69,7 @@ class MovieModel {
       final DateTime releaseDate = DateTime(2020, 1 + (i % 12), 1 + (i % 28));
 
       final String image = images[imageIndex];
-      final bool isBookmarked = false;
+      final bool isBookmarked = false; // Alternate bookmark status
       final bool isFeatured = i % 5 == 0; // Every fifth book is featured
 
       movies.add(

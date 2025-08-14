@@ -1,5 +1,8 @@
+import 'package:depi_film_app/controllers/bookmark_controller.dart';
+import 'package:depi_film_app/helpers/themes/app_colors.dart';
 import 'package:depi_film_app/models/movie_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class GridMovieItem extends StatefulWidget {
   final MovieModel item;
@@ -38,11 +41,22 @@ class _GridMovieItemState extends State<GridMovieItem> {
                   setState(() {
                     widget.item.isBookmarked = !widget.item.isBookmarked;
                   });
+                  final bookmarkController = Provider.of<BookmarkController>(
+                    context,
+                    listen: false,
+                  );
+                  if (widget.item.isBookmarked) {
+                    bookmarkController.addBookmark(widget.item);
+                  } else {
+                    bookmarkController.removeBookmark(widget.item);
+                  }
                 },
-                icon:
-                    widget.item.isBookmarked
-                        ? Icon(Icons.bookmark, color: Colors.red)
-                        : Icon(Icons.bookmark_border, color: Colors.red),
+                icon: Icon(
+                  widget.item.isBookmarked
+                      ? Icons.bookmark
+                      : Icons.bookmark_border,
+                  color: AppColors.yellowColor,
+                ),
               ),
             ],
           ),
